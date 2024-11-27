@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*
+{
+  background-color: #C0BEC9;
+  font-family: "Roboto", sans-serif;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.navbar
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #A9292D;
+  display: flex;
+  padding: 15px;
+}
+.navItem
+{
+  justify-content: flex-start;
+  background-color: #A9292D;
+}
+
+.navItem button
+{
+  background-color: #A9292D;
+  color: #fff;
+  padding: 4px;
+  margin: 10px;
+  margin-right: 100px;
+  cursor: pointer;
+}
+
+.registerForm
+{
+  display: flex;
+  flex-direction: column; 
+  gap: 10px; 
+  width: 300px; 
+  margin: 0 auto; 
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formTitle
+{
+  background-color: #fff;
+  color: #000;
+  text-align: left;
+}
+
+.registerForm input
+{
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  margin: 10px;
+}
+
+.formButton
+{
+  background-color: #A9292D;
+  font-size: 24;
+  font-weight: bold;
+  border-radius: 25px;
+  width: 50%;
+  margin: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formPrompt
+{
+  background: none;
+  color: #1097F6;
+  text-decoration: underline;
+  font-size: 15px;
+  padding: 0;
+}
+
+.formText
+{
+  color: #000;
+  font-size: 15px;
+}
+
+.profile {
+  position: fixed;
+  right: 0;
+  cursor: pointer;
+  background-color: #A9292D; 
+  margin-right: 100px;
+}
+
+.profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.dropdown
+{
+  background-color: #A9292D;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  margin-right: 50px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column; 
+
+}
+
+.logoutButton {
+  background-color: #A9292D;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+
+}
+.dropdownButton
+{
+  background: #fff;
+}
+
+.dropdownButton button {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdownButton button:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.logoutButton:hover {
+  background-color: #851f1a;
+}
