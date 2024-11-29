@@ -3,6 +3,7 @@ import { getDB } from './connect.js';
 import jwt from 'jsonwebtoken'
 
 import dotenv from 'dotenv';
+import axios from 'axios';
 dotenv.config({ path: '../.env' });
 
 let jobRoutes = express.Router()
@@ -26,6 +27,73 @@ jobRoutes.route("/jobs").get(verifyToken, async (request, response) => {
     }else
     {
         throw new Error("Data was not found!")
+    }
+})
+
+// SEARCH JOBS API
+jobRoutes.route("/jobs/api/search").post(verifyToken, async (request, response) => {
+    
+    const api = `https://www.reed.co.uk/api/1.0/search?keywords=${request.body.keywords}&location={request.body.locationName}&distancefromlocation=${request.params.distanceFromLocation}&partTime=${request.body.partTime}&fullTime=${request.body.fullTime}&minimumSalary=${request.body.minimumSalary}&maximumSalary=${request.body.maximumSalary}&resultsToTake=10`
+    const username = process.env.REED_API_KEY
+    const { data } = await axios.get(api, {
+        auth: {
+            username: username,
+            password: ''
+        }
+    })
+
+    if(Array.isArray(data?.results) && data.results.length > 0)
+    {
+        response.json(data.results)
+    }else
+    {
+        response.json({ message: "No Data Found" });
+    }
+})
+
+// SEARCH DATABASE
+jobRoutes.route("/jobs/search").post(verifyToken, async (request, response) => {
+    const database = getDB();
+
+    const filters = request.body;
+ 
+    const dbQuery = {};
+
+    if (filters.keywords) {
+        dbQuery.keywords = filters.keywords; // Regex search for keywords
+    }
+
+    // If 'locationName' is provided, search by location (case-insensitive)
+    if (filters.locationName) {
+        dbQuery.locationName = filters.locationName; // Regex search for location
+    }
+
+    if (filters.partTime !== undefined) {
+        dbQuery.partTime = filters.partTime;
+    }
+
+    if (filters.fullTime !== undefined) {
+        dbQuery.fullTime = filters.fullTime;
+    }
+
+    if (filters.minimumSalary) {
+        dbQuery.minimumSalary = Number(filters.minimumSalary);
+    }
+
+
+    if (filters.maximumSalary) {
+        dbQuery.maximumSalary = Number(filters.maximumSalary);
+    }
+
+
+
+    let data = await database.collection("jobs").find(dbQuery).toArray()
+    if(data.length > 0)
+    {
+        response.json(data)
+    }else
+    {
+        response.json({ message: "No Data Found" });
     }
 })
 

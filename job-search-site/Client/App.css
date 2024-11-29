@@ -197,3 +197,134 @@
 .logoutButton:hover {
   background-color: #851f1a;
 }
+
+.job-search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
+  margin: auto;
+  color: #000;
+}
+
+.job-search-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background-color: #fff;
+  color: #000;
+}
+
+.job-search-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  background-color: #fff;
+  color: #000;
+}
+
+.job-search-input {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  width: 200px;
+  background-color: #fff;
+  color: #000;
+}
+
+.job-search-select {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  width: 100px;
+  background-color: #fff;
+  color: #000;
+}
+
+.job-search-button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #b22222;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.job-search-button:hover {
+  background-color: #a11d1d;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #000;
+  background-color: #fff;
+}
+
+.job-card {
+  border: 1px solid #000;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  cursor: pointer;
+}
+
+.job-card:hover {
+  background-color: #f0f0f0;
+}
+
+
+.job-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.row p {
+  margin: 0;
+  flex: 1;
+}
+
+.job-card h1
+{
+  font-size: 20px;
+}
+
+.job-card *
+{
+  font-size: 15px;
+  text-align: left;
+  background-color: #fff;
+}
+
+.job-cards-container
+{
+  height: 500px; /* Set your desired fixed height */
+  overflow-y: auto; /* Make the container scrollable */
+  padding-right: 10px;
+  margin-top: 20px;
+}

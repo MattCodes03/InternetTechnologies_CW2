@@ -74,3 +74,33 @@ export async function getJobs()
         return
     }
 }
+
+
+export async function searchForJobs(filters: object) 
+{
+
+    let response = []
+
+     // Search Database
+     const database_response = await axios.post(`${URL}/jobs/search`, filters)
+     console.log("Database Response:", database_response.data); 
+
+     if (database_response.data.length > 0) {
+         response = [...response, ...database_response.data];
+     }
+
+    // Search API
+    const api_response = await axios.post(`${URL}/jobs/api/search`, filters)
+
+
+    if (api_response.data.length > 0) {
+        response = [...response, ...api_response.data];
+    }
+
+    if(response.length === 0)
+    {
+            return { message: "No Data Found" };
+    }
+    
+    return response
+}
