@@ -13,14 +13,14 @@ export function Login()
 
     const navigate = useNavigate()
 
-    function handleChange(e)
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>)
     {
         setUser({...user, [e.target.name]: e.target.value})
     }
 
-    async function handleSubmit(e) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        let response = await verifyUser(user)
+        const response = await verifyUser(user)
         if(response)
         {
             sessionStorage.setItem("User", response)

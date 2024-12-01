@@ -1,4 +1,6 @@
-export function JobCard({ job, onClick }) {
+
+
+export function JobCard({ job, onClick }: { job: any, onClick: (event: React.MouseEvent<HTMLButtonElement>) => void }) {
     return (
         <div className="job-card" onClick={() => onClick(job)}>
             <h1>{job.jobTitle}</h1>

@@ -12,11 +12,11 @@ export function Register()
           {!view ?
           <> 
             <Login/>
-            <span className="formText">Already have an account?</span><button className="formPrompt" onClick={() => setView(!view)}>Register Here</button>
+            <span className="formText">Don't have an account?</span><button className="formPrompt" onClick={() => setView(1)}>Register Here</button>
           </> : 
             <> 
             <CreateUser/>
-            <span className="formText">Don't have an account?</span><button  className="formPrompt" onClick={() => setView(!view)}>Login Here</button>
+            <span className="formText">Already have an account?</span><button  className="formPrompt" onClick={() => setView(0)}>Login Here</button>
           </> }
         </>
     )

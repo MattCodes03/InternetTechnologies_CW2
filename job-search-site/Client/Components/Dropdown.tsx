@@ -1,12 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export function Dropdown({ onLogout }) {
+type DropdownProps = {
+    onLogout: () => void;
+  };
+  
+
+export function Dropdown({ onLogout }: DropdownProps) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const dropdownRef = useRef(null);
-    const profileRef = useRef(null);
-
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
+    const profileRef = useRef<HTMLDivElement | null>(null);
+    
     const toggleDropdown = () => {
         setDropdownOpen((prevState) => !prevState);
     };
@@ -17,12 +22,12 @@ export function Dropdown({ onLogout }) {
 
     // Close the dropdown if users clicks outside of it
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: MouseEvent) => {
             if (
                 dropdownRef.current &&
-                !dropdownRef.current.contains(event.target) &&
+                !dropdownRef.current.contains(event.target as Node) &&
                 profileRef.current &&
-                !profileRef.current.contains(event.target)
+                !profileRef.current.contains(event.target as Node)
             ) {
                 closeDropdown();
             }

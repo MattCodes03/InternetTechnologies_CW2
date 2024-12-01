@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function JobSearch()
 {
-    const [jobs, setJobs] = useState([]);
+    const [jobs, setJobs] = useState<Record<string, any>[]>([]);
 
     const navigate = useNavigate()
 
@@ -20,24 +20,41 @@ export function JobSearch()
 
     })
 
-    function handleChange(e)
-    {
-        const { name, value, type, checked } = e.target;
-        setQuery({...query, [name]: type === "checkbox" ? checked : value,});
+    function handleChange(e: any) {
+      const { name, value, checked, type } = e.target;
+    
+      if (type === 'checkbox') {
+        // Handle checkbox
+        setQuery({
+          ...query,
+          [name]: checked,
+        });
+      } else {
+        // Handle other types like text inputs and select dropdowns
+        setQuery({
+          ...query,
+          [name]: value,
+        });
+      }
     }
 
-    function viewJob(job)
+    function viewJob(job: object)
     {
       navigate("/job", { state: { job } });
     }
 
 
 
-    async function handleSubmit(e) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         const response = await searchForJobs(query)
-        setJobs(response)
+
+        if (Array.isArray(response)) {
+          setJobs(response)
+        } else {
+          console.error(response.message);
+      }
         
     }
 
@@ -53,31 +70,30 @@ export function JobSearch()
   return (
         <>
         <div className="job-search-container">
+          <form onSubmit={handleSubmit}>
       <div className="job-search-form">
         {/* Keywords input */}
         <input
           type="text"
           name="keywords"
-          placeholder="Find your next career"
-          value={query.keywords}
+          placeholder="Find your next career..."
           onChange={handleChange}
-          className="job-search-input"
+          className="job-search-input-keywords"
         />
 
         {/* Location input */}
         <input
           type="text"
           name="locationName"
-          placeholder="Postcode"
-          value={query.locationName}
+          placeholder="Town or City..."
           onChange={handleChange}
-          className="job-search-input"
+          className="job-search-input-location"
         />
 
         {/* Distance dropdown */}
         <select
           name="distanceFromLocation"
-          value={query.distanceFromLocation}
+
           onChange={handleChange}
           className="job-search-select"
         >
@@ -113,26 +129,25 @@ export function JobSearch()
           type="number"
           name="minimumSalary"
           placeholder="Min Salary"
-          value={query.minimumSalary}
           onChange={handleChange}
-          className="job-search-input"
+          className="job-search-input-salary"
         />
         <input
           type="number"
           name="maximumSalary"
           placeholder="Max Salary"
-          value={query.maximumSalary}
           onChange={handleChange}
-          className="job-search-input"
+          className="job-search-input-salary"
         />
       </div>
 
       {/* Search button */}
-      <button onClick={handleSubmit} className="job-search-button">
+      <button type="submit" className="job-search-button">
         Search
       </button>
+      </form>
     </div>
-
+  
   <div className="job-cards-container">
 <div className="job-cards">
 {jobs.length > 0 ? (

@@ -4,7 +4,6 @@ import { CreateJob } from './Pages/CreateJob'
 import { JobListing } from './Pages/JobListing'
 import { Home } from './Pages/Home'
 import { Register } from './Pages/Register'
-import { NavBar } from './Components/NavBar'
 import { Layout } from './Components/Layout'
 import { useEffect } from 'react'
 import axios from 'axios'
@@ -22,7 +21,7 @@ function App() {
 
   // Checking for Auth Headers on page refresh
   useEffect(() => {
-    let token = sessionStorage.getItem("User")
+    const token = sessionStorage.getItem("User")
     if(token)
     {
       axios.defaults.headers.common["Authorisation"] = `Bearer ${token}`

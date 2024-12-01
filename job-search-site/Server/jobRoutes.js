@@ -33,7 +33,7 @@ jobRoutes.route("/jobs").get(verifyToken, async (request, response) => {
 // SEARCH JOBS API
 jobRoutes.route("/jobs/api/search").post(verifyToken, async (request, response) => {
     
-    const api = `https://www.reed.co.uk/api/1.0/search?keywords=${request.body.keywords}&location={request.body.locationName}&distancefromlocation=${request.params.distanceFromLocation}&partTime=${request.body.partTime}&fullTime=${request.body.fullTime}&minimumSalary=${request.body.minimumSalary}&maximumSalary=${request.body.maximumSalary}&resultsToTake=10`
+    const api = `https://www.reed.co.uk/api/1.0/search?keywords=${request.body.keywords}&locationName={request.body.locationName}&distancefromlocation=${request.params.distanceFromLocation}&partTime=${request.body.partTime}&fullTime=${request.body.fullTime}&minimumSalary=${request.body.minimumSalary}&maximumSalary=${request.body.maximumSalary}&resultsToTake=10`
     const username = process.env.REED_API_KEY
     const { data } = await axios.get(api, {
         auth: {

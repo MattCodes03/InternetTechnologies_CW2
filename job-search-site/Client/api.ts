@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = "http://localhost:3000"
+const URL = "http://35.178.9.15:3000"
 
 // USERS 
 
@@ -31,8 +31,15 @@ export async function getUser(id: string)
 export async function createUser(user: object)
 {
     const response = await axios.post(`${URL}/register`, user)
+
+    if(response.data.success)
+    {
+        return response.data.token
+    }else
+    {
+        return 
+    }
     
-    return response
 }
 
 export async function updateUser(id: string, user: object)
@@ -79,7 +86,9 @@ export async function getJobs()
 export async function searchForJobs(filters: object) 
 {
 
-    let response = []
+    let response: any[] = []
+
+    console.log(filters)
 
      // Search Database
      const database_response = await axios.post(`${URL}/jobs/search`, filters)
@@ -91,7 +100,7 @@ export async function searchForJobs(filters: object)
 
     // Search API
     const api_response = await axios.post(`${URL}/jobs/api/search`, filters)
-
+    console.log("API Response:", api_response.data); 
 
     if (api_response.data.length > 0) {
         response = [...response, ...api_response.data];

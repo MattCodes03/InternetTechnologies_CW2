@@ -1,0 +1,58 @@
+{
+    "users": [
+        {
+            "_id": ObjectId,
+            "firstname": String,
+            "lastname": String,
+            "phonenumber": String,
+            "email": String,
+            "password": String,
+            "type": String,
+            "dateCreated": String,
+            "bio": String,
+            "cv": String,
+            "profilepicture": String,
+        }
+    ],
+
+    "employers": [
+        {
+            "_id": ObjectId,
+            "dateCreated": String,
+            "bio": String,
+            "companyname": String,
+            "phonenumber": String,
+            "profilepicture": String,
+            "adminUserID": ObjectId,
+            
+        }
+    ],
+
+    "jobs": [
+        "_id": ObjectId,
+        "jobTitle": String,
+        "jobDescription": String,
+        "keywords": String,
+        "locationName": String,
+        "partTime": Boolean,
+        "fullTime": Boolean,
+        "minimumSalary": Integer,
+        "maximumSalary": Integer,
+        "employerName": String,
+        "employerID": ObjectId,
+        "expiryDate": String,
+    ],
+
+    "job_applications": [
+        "_id": ObjectId,
+        "userID": ObjectId,
+        "employerID": ObjectId,
+        "jobID": ObjectId,
+        "dateSubmitted": String,
+        "additionalInfo": String,
+        "contactnumber": String
+    ],
+}
+
+
+

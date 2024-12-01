@@ -46,33 +46,7 @@ userRoutes.route("/users/:id").get(async (request, response) => {
     }
 })
 
-// CREATE
-userRoutes.route("/register").post(async (request, response) => {
-    const database = getDB();
 
-    const takenEmail = await database.collection("users").findOne({email: request.body.email})
-    if(takenEmail)
-    {
-        response.json({message: "Email already in use"})
-    }else
-    {
-
-    const hash = await bcrypt.hash(request.body.password, SALT_ROUNDS)
-
-    let newUser = {
-        firstname:request.body.firstname,
-        lastname:request.body.lastname,
-        phonenumber:request.body.phonenumber,
-        email:request.body.email,
-        password:hash,
-        type:request.body.type,
-        dateCreated:request.body.dateCreated || new Date().toISOString()
-    }
-
-    let data = await database.collection("users").insertOne(newUser)
-    response.json(data)
-}
-})
 
 // UPDATE
 userRoutes.route("/users/:id").post(async (request, response) => {
@@ -99,6 +73,35 @@ userRoutes.route("/users/:id").delete(async (request, response) => {
     response.json(data)
 })
 
+// CREATE
+userRoutes.route("/register").post(async (request, response) => {
+    const database = getDB();
+
+    const takenEmail = await database.collection("users").findOne({email: request.body.email})
+    if(takenEmail)
+    {
+        response.json({message: "Email already in use"})
+    }else
+    {
+
+    const hash = await bcrypt.hash(request.body.password, SALT_ROUNDS)
+
+    let newUser = {
+        firstname:request.body.firstname,
+        lastname:request.body.lastname,
+        phonenumber:request.body.phonenumber,
+        email:request.body.email,
+        password:hash,
+        type:request.body.type,
+        dateCreated:request.body.dateCreated || new Date().toISOString()
+    }
+
+    let data = await database.collection("users").insertOne(newUser)
+    const token = jwt.sign(user, process.env.JWT_KEY, {expiresIn: "10h"})
+    response.json({success: true, token})
+}
+})
+
 // Verify
 userRoutes.route("/user/login").post(async (request, response) => {
     const database = getDB();
@@ -111,7 +114,7 @@ userRoutes.route("/user/login").post(async (request, response) => {
         let confirmation = await bcrypt.compare(request.body.password, user.password)
         if(confirmation)
         {
-            const token = jwt.sign(user, process.env.JWT_KEY, {expiresIn: "1h"})
+            const token = jwt.sign(user, process.env.JWT_KEY, {expiresIn: "10h"})
             response.json({success: true, token})
         }else
         {
