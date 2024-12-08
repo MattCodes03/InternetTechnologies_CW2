@@ -107,6 +107,7 @@ export function JobSearch()
 
       {/* Additional options */}
       <div className="job-search-options">
+        <div className="job-search-type">
         <label>
           <input
             type="checkbox"
@@ -125,6 +126,9 @@ export function JobSearch()
           />
           Full-time
         </label>
+        </div>
+
+        <div className="job-search-salary">
         <input
           type="number"
           name="minimumSalary"
@@ -139,6 +143,7 @@ export function JobSearch()
           onChange={handleChange}
           className="job-search-input-salary"
         />
+        </div>
       </div>
 
       {/* Search button */}

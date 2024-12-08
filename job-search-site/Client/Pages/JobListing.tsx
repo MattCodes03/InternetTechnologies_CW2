@@ -13,6 +13,7 @@ export function JobListing()
         {job ? (
           <div className="job-listing">
             <h1 className="job-title">{job.jobTitle}</h1>
+            <p className="job-info">Expiry Date: {job.expirationDate}</p>
 
             <div className="job-info-container">
             <div className="job-info-row">
@@ -24,6 +25,7 @@ export function JobListing()
             <p className="job-info">Job Type: {job.partTime ? 'Part-Time' : 'Full-Time'}</p>
             <p className="job-info">Employer: {job.employerName}</p>
             </div>
+
             </div>
 
             <div className="job-description-container">

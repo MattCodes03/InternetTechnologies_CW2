@@ -18,7 +18,9 @@ export function Layout()
     return(
         <>
         <NavBar/>
-        <Outlet/>
+        <div className="content">
+                <Outlet />
+            </div>
         </>
     )
 }

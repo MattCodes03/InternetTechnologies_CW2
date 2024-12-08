@@ -18,10 +18,10 @@ export function CreateJobForm()
         maximumSalary: 0,
         employerName: "Test Company",
         employerID: 0,
-        expiryDate: "",
+        expirationDate: "",
     })
 
-    function handleChange(e: React.ChangeEvent<HTMLInputElement>)
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)
     {
         setJob({...job, [e.target.name]: e.target.value})
     }
@@ -42,13 +42,16 @@ export function CreateJobForm()
 
     return (
         
-        <form className="registerForm" onSubmit={handleSubmit}>
+        <form className="createJobForm" onSubmit={handleSubmit}>
             <h3 className="formTitle">Create a Job</h3>
-            <input name="jobTitle" maxLength={20} placeholder={"Title"} onChange={handleChange} required/>
-            <input name="jobDescription" maxLength={500} placeholder={"Description"} onChange={handleChange} required></input>
-            <input name="keywords" maxLength={20} placeholder={"Keywords (Space Seperated)"} onChange={handleChange} required/>
-            <input name="locationName" maxLength={20} placeholder={"Town or City"} onChange={handleChange} required/>
+            <input name="jobTitle" maxLength={30} placeholder={"Title"} onChange={handleChange} required/>
 
+            <textarea name="jobDescription" maxLength={500} placeholder="Description" onChange={handleChange} required rows={8} /* Adjust the number of visible rows */></textarea>
+
+            <input name="keywords" placeholder={"Keywords (Space Seperated)"} onChange={handleChange} required/>
+            <input name="locationName" placeholder={"Town or City"} onChange={handleChange} required/>
+
+            <div className="row">
             <label>
           <input
             type="checkbox"
@@ -65,21 +68,30 @@ export function CreateJobForm()
           />
           Full-time
         </label>
+
+        </div>
+
+        <div className="row">
         <input
           type="number"
           name="minimumSalary"
           placeholder="Min Salary"
           onChange={handleChange}
-          className="job-search-input-salary"
+          className="job-create-salary"
         />
+     
+
+       
         <input
           type="number"
           name="maximumSalary"
           placeholder="Max Salary"
           onChange={handleChange}
-          className="job-search-input-salary"
+          className="job-create-salary"
         />
-            <input name="expiryDate" maxLength={20} placeholder={"Date of Expiriy"} onChange={handleChange} required/>
+
+</div>
+            <input name="expirationDate" type="date" maxLength={20} placeholder={"Date of Expiriy"} onChange={handleChange} required/>
 
             <button className="formButton" type="submit">Create</button>
         </form>

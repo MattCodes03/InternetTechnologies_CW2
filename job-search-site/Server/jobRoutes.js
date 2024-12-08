@@ -33,7 +33,7 @@ jobRoutes.route("/jobs").get(verifyToken, async (request, response) => {
 // SEARCH JOBS API
 jobRoutes.route("/jobs/api/search").post(verifyToken, async (request, response) => {
     
-    const api = `https://www.reed.co.uk/api/1.0/search?keywords=agriculture+${request.body.keywords}&locationName={request.body.locationName}&distancefromlocation=${request.params.distanceFromLocation}&partTime=${request.body.partTime}&fullTime=${request.body.fullTime}&minimumSalary=${request.body.minimumSalary}&maximumSalary=${request.body.maximumSalary}&resultsToTake=10`
+    const api = `https://www.reed.co.uk/api/1.0/search?keywords=agriculture+${request.body.keywords}&locationName=${request.body.locationName}&distancefromlocation=${request.params.distanceFromLocation}&partTime=${request.body.partTime}&fullTime=${request.body.fullTime}&minimumSalary=${request.body.minimumSalary}&maximumSalary=${request.body.maximumSalary}&resultsToTake=10`
     const username = process.env.REED_API_KEY
     const { data } = await axios.get(api, {
         auth: {
@@ -43,7 +43,8 @@ jobRoutes.route("/jobs/api/search").post(verifyToken, async (request, response) 
     })
 
     if(Array.isArray(data?.results) && data.results.length > 0)
-    {
+    {   
+        
         response.json(data.results)
     }else
     {
@@ -112,7 +113,7 @@ jobRoutes.route("/jobs/new").post(verifyToken, async (request, response) => {
         maximumSalary: request.body.maximumSalary,
         employerName: request.body.employerName,
         employerID: 0,
-        expiryDate: request.body.expiryDate,
+        expirationDate: request.body.expirationDate,
     }
 
     let data = await database.collection("jobs").insertOne(newJob)
