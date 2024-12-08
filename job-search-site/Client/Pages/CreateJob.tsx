@@ -1,8 +1,10 @@
+import { CreateJobForm } from "../Components/CreateJobForm";
+
 export function CreateJob()
 {
     return (
         <>
-        Create Job Listing Page
+        <CreateJobForm></CreateJobForm>
         </>
     )
 }

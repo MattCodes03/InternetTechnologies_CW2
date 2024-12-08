@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const URL = "http://35.178.9.15:3000"
+// Production const URL = "http://35.178.9.15:3000"
+
+// Development
+const URL = "http://127.0.0.1:3000"
 
 // USERS 
 
@@ -112,4 +115,18 @@ export async function searchForJobs(filters: object)
     }
     
     return response
+}
+
+export async function createJob(job: object)
+{
+    const response = await axios.post(`${URL}/jobs/new`, job)
+
+    if(response.data.success)
+    {
+        return response
+    }else
+    {
+        return 
+    }
+    
 }
