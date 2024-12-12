@@ -27,7 +27,7 @@ export function NavBar()
             </button>
 
             <div className="navbar-logo">
-                <Link to="/home">AgriJobs</Link> {/* Replace with your logo or brand name */}
+                <Link to="/home">AgriJobs</Link>
             </div>
             <div className={`nav-items ${isMobile ? "active" : ""}`}>
                 {pageData.map((page, index) => (
